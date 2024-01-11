@@ -6,10 +6,13 @@ namespace Galerie_Arta_Web.Models
     {
         public int Id { get; set; }
 
-  
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s-]*$", ErrorMessage =
+        "Prenumele trebuie sa inceapa cu majuscula (ex. Ana sau Ana Maria")]
+        [StringLength(30, MinimumLength = 3)]
         public string? Name { get; set; }
 
-
+        [RegularExpression(@"^[A-Z]+[a-z\s]*$")]
+        [StringLength(30, MinimumLength = 3)]
         public string? Prenume { get; set; }
 
 

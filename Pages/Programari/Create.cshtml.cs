@@ -54,6 +54,7 @@ namespace Galerie_Arta_Web.Pages.Programari
                 return Page();
             }
 
+
             _context.Programare.Add(Programare);
             await _context.SaveChangesAsync();
 

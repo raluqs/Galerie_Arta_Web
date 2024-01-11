@@ -4,8 +4,24 @@ using Galerie_Arta_Web.Data;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+   policy.RequireRole("Admin"));
+});
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(
+    options =>
+    {
+        options.Conventions.AuthorizeFolder("/Tablouri");
+        options.Conventions.AllowAnonymousToPage("/Tablouri/Index");
+        options.Conventions.AllowAnonymousToPage("/Tablouri/Details");
+        options.Conventions.AuthorizeFolder("/Utilizatori", "AdminPolicy");
+
+    }
+    );
 builder.Services.AddDbContext<Galerie_Arta_WebContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Galerie_Arta_WebContext") ?? throw new InvalidOperationException("Connection string 'Galerie_Arta_WebContext' not found.")));
 
@@ -13,6 +29,7 @@ builder.Services.AddDbContext<LibraryIdentityContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Galerie_Arta_WebContext") ?? throw new InvalidOperationException("Connection string 'Galerie_Arta_WebContext' not found.")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LibraryIdentityContext>();
 
 var app = builder.Build();

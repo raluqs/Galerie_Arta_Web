@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Galerie_Arta_Web.Data;
 using Galerie_Arta_Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Galerie_Arta_Web.Pages.Tablouri
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly Galerie_Arta_Web.Data.Galerie_Arta_WebContext _context;
