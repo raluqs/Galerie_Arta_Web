@@ -75,3 +75,16 @@ body {
     justify-content: center;
     gap: 20px;
 }
+.button-link {
+    margin-right: 10px;
+}
+
+.search-box form {
+    display: flex;
+    align-items: center;
+}
+
+.search-box .form-group {
+    margin-right: 10px;
+    margin-bottom: 0;
+}

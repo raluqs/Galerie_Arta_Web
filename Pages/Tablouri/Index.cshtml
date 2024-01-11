@@ -8,8 +8,20 @@
 <h1>Lista Tablourilor</h1>
 
 <p>
-    <a asp-page="Create">Adauga Tablou</a>
+    <a asp-page="Create" class="button-link">Adauga Tablou</a>
+    <a asp-page="./Index" asp-route-sortOrder="price_asc" class="button-link">Preț ascendent</a>
+    <a asp-page="./Index" asp-route-sortOrder="price_desc" class="button-link">Preț descendent</a>
+    <div class="search-box">
+        <form asp-page="./Index" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" name="searchString" value="@Model.CurrentFilter" placeholder="Caută tablou (Denumire sau Numele Artistului)" />
+            </div>
+            <button type="submit" class="button-link">Caută</button>
+            <a asp-page="./Index" class="button-link">Lista Tablouri</a>
+        </form>
+    </div>
 </p>
+
 
 <div class="grid-container">
     @foreach (var item in Model.Tablou)

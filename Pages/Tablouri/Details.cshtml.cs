@@ -28,7 +28,9 @@ namespace Galerie_Arta_Web.Pages.Tablouri
                 return NotFound();
             }
 
-            var tablou = await _context.Tablou.FirstOrDefaultAsync(m => m.ID == id);
+            var tablou = await _context.Tablou
+                .Include(t => t.Artist)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (tablou == null)
             {
                 return NotFound();

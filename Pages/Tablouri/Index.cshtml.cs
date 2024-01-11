@@ -20,14 +20,30 @@ namespace Galerie_Arta_Web.Pages.Tablouri
         }
 
         public IList<Tablou> Tablou { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public string CurrentFilter { get; set; }
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            if (_context.Tablou != null)
+            IQueryable<Tablou> tablouriQuery = from t in _context.Tablou
+                                               .Include(t => t.Artist)
+                                               select t;
+
+            switch (sortOrder)
             {
-                Tablou = await _context.Tablou
-                .Include(t => t.Artist).ToListAsync();
+                case "price_desc":
+                    tablouriQuery = tablouriQuery.OrderByDescending(t => t.Pret);
+                    break;
+                case "price_asc":
+                default:
+                    tablouriQuery = tablouriQuery.OrderBy(t => t.Pret);
+                    break;
             }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tablouriQuery = tablouriQuery.Where(t => t.Denumire.Contains(searchString)
+                                           || (t.Artist.Nume + " " + t.Artist.Prenume).Contains(searchString));
+            }
+
+            Tablou = await tablouriQuery.ToListAsync();
         }
     }
 }
