@@ -1,0 +1,51 @@
+﻿@page
+@model Galerie_Arta_Web.Pages.Tablouri.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista Tablourilor</h1>
+
+<p>
+    <a asp-page="Create">Adauga Tablou</a>
+</p>
+
+<div class="grid-container">
+    @foreach (var item in Model.Tablou)
+    {
+        <div class="grid-item">
+            <div>
+                <strong>Denumire:</strong> @Html.DisplayFor(modelItem => item.Denumire)
+            </div>
+            <div>
+                <strong>Artist/Pictor:</strong> @Html.DisplayFor(modelItem => item.Artist.Nume_Complet)
+            </div>
+       
+            <div>
+                <strong>Data Finalizare:</strong> @item.DataRealizareFormatata
+            </div>
+            <div>
+                <strong>Dimensiune(cm):</strong> @Html.DisplayFor(modelItem => item.Dimensiune)
+            </div>
+            <div>
+                <strong>Preț(EUR):</strong> @Html.DisplayFor(modelItem => item.Pret)
+            </div>
+            <div>
+                <strong>Descriere:</strong> @Html.DisplayFor(modelItem => item.Descriere)
+            </div>
+            <div class="image-container">
+                @if (!string.IsNullOrEmpty(item.Imagine))
+                {
+                    <img src="@Url.Content("~/images/" + item.Imagine)" alt="@item.Denumire" style="width:100%; height:auto;"/>
+                }
+            </div>
+            <div>
+                <a asp-page="./Edit" asp-route-id="@item.ID" class="button-link">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID" class="button-link">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID" class="button-link">Delete</a>
+            </div>
+
+        </div>
+    }
+</div>

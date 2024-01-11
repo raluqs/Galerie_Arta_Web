@@ -1,0 +1,45 @@
+﻿@page
+@model Galerie_Arta_Web.Pages.Programari.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Programare</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Programare.Id" />
+            <div class="form-group">
+                <label asp-for="Programare.Data" class="control-label"></label>
+                <input asp-for="Programare.Data" class="form-control" />
+                <span asp-validation-for="Programare.Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Programare.TablouID" class="control-label"></label>
+                <select asp-for="Programare.TablouID" class="form-control" asp-items="ViewBag.TablouID"></select>
+                <span asp-validation-for="Programare.TablouID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Programare.UtilizatorID" class="control-label"></label>
+                <select asp-for="Programare.UtilizatorID" class="form-control" asp-items="ViewBag.UtilizatorID"></select>
+                <span asp-validation-for="Programare.UtilizatorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

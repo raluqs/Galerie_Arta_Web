@@ -1,0 +1,66 @@
+﻿@page
+@model Galerie_Arta_Web.Pages.Tablouri.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Tablou</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Tablou.ID" />
+            <div class="form-group">
+                <label asp-for="Tablou.Denumire" class="control-label"></label>
+                <input asp-for="Tablou.Denumire" class="form-control" />
+                <span asp-validation-for="Tablou.Denumire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tablou.Data_realizare" class="control-label"></label>
+                <input asp-for="Tablou.Data_realizare" class="form-control" />
+                <span asp-validation-for="Tablou.Data_realizare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tablou.Dimensiune" class="control-label"></label>
+                <input asp-for="Tablou.Dimensiune" class="form-control" />
+                <span asp-validation-for="Tablou.Dimensiune" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tablou.Pret" class="control-label"></label>
+                <input asp-for="Tablou.Pret" class="form-control" />
+                <span asp-validation-for="Tablou.Pret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tablou.Descriere" class="control-label"></label>
+                <input asp-for="Tablou.Descriere" class="form-control" />
+                <span asp-validation-for="Tablou.Descriere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tablou.Imagine" class="control-label"></label>
+                <input asp-for="Tablou.Imagine" class="form-control" />
+                <span asp-validation-for="Tablou.Imagine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tablou.ArtistID" class="control-label">Nume Artist</label>
+                <select asp-for="Tablou.ArtistID" class="form-control" asp-items="ViewBag.ArtistID"></select>
+                <span asp-validation-for="Tablou.ArtistID" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
