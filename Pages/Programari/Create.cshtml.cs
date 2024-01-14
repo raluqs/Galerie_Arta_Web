@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Galerie_Arta_Web.Data;
 using Galerie_Arta_Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Galerie_Arta_Web.Pages.Programari
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly Galerie_Arta_Web.Data.Galerie_Arta_WebContext _context;
@@ -21,8 +23,8 @@ namespace Galerie_Arta_Web.Pages.Programari
 
         public IActionResult OnGet()
         {
-        ViewData["TablouID"] = new SelectList(_context.Tablou, "ID", "Denumire");
-        ViewData["UtilizatorID"] = new SelectList(_context.Utilizator, "Id", "Email");
+            ViewData["TablouID"] = new SelectList(_context.Tablou, "ID", "Denumire");
+            ViewData["UtilizatorID"] = new SelectList(_context.Utilizator, "Id", "Email");
             return Page();
         }
 
@@ -40,7 +42,7 @@ namespace Galerie_Arta_Web.Pages.Programari
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Programare == null || Programare == null)
+            if (!ModelState.IsValid || _context.Programare == null || Programare == null)
             {
                 return Page();
             }

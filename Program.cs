@@ -19,6 +19,13 @@ builder.Services.AddRazorPages(
         options.Conventions.AllowAnonymousToPage("/Tablouri/Index");
         options.Conventions.AllowAnonymousToPage("/Tablouri/Details");
         options.Conventions.AuthorizeFolder("/Utilizatori", "AdminPolicy");
+        options.Conventions.AuthorizeFolder("/Artisti");
+        options.Conventions.AllowAnonymousToPage("/Artisti/Index");
+        options.Conventions.AllowAnonymousToPage("/Artisti/Details");
+        options.Conventions.AuthorizeFolder("/Programari");
+      
+        
+
 
     }
     );

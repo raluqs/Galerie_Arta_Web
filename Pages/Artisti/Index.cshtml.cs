@@ -10,6 +10,7 @@ using Galerie_Arta_Web.Models;
 
 namespace Galerie_Arta_Web.Pages.Artisti
 {
+
     public class IndexModel : PageModel
     {
         private readonly Galerie_Arta_Web.Data.Galerie_Arta_WebContext _context;

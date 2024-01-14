@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Galerie_Arta_Web.Data;
 using Galerie_Arta_Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Galerie_Arta_Web.Pages.Programari
 {
+    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly Galerie_Arta_Web.Data.Galerie_Arta_WebContext _context;
@@ -28,7 +30,10 @@ namespace Galerie_Arta_Web.Pages.Programari
                 return NotFound();
             }
 
-            var programare = await _context.Programare.FirstOrDefaultAsync(m => m.Id == id);
+            var programare = await _context.Programare
+                .Include(p => p.Tablou)
+                .Include(p => p.Utilizator)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (programare == null)
             {
                 return NotFound();
