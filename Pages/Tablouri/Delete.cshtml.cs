@@ -46,16 +46,24 @@ namespace Galerie_Arta_Web.Pages.Tablouri
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Tablou == null)
+            if (id == null)
             {
                 return NotFound();
             }
+
             var tablou = await _context.Tablou.FindAsync(id);
 
             if (tablou != null)
             {
-                Tablou = tablou;
-                _context.Tablou.Remove(Tablou);
+                var programareRecords = await _context.Programare.Where(p => p.TablouID == id).ToListAsync();
+
+                foreach (var programare in programareRecords)
+                {
+                    _context.Programare.Remove(programare);
+                }
+
+                _context.Tablou.Remove(tablou);
+
                 await _context.SaveChangesAsync();
             }
 
